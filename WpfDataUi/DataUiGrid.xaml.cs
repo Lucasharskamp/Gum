@@ -396,14 +396,15 @@ namespace WpfDataUi
 
         }
 
-        public void MoveMemberToCategory(string memberName, string categoryName)
+        public void MoveMemberToCategory(string memberName, string categoryId, string categoryName)
         {
             var member = Categories.SelectMany(item => item.Members).FirstOrDefault(item => item.Name == memberName);
-            var desiredCategory = Categories.FirstOrDefault(item => item.Name == categoryName);
+            var desiredCategory = Categories.FirstOrDefault(item => item.Name == categoryId);
 
             if(desiredCategory == null)
             {
                 desiredCategory = new MemberCategory(categoryName);
+                desiredCategory.Name = categoryId;
                 Categories.Add(desiredCategory);
             }
 
