@@ -323,7 +323,7 @@ namespace WpfDataUi
                 {
                     category.Members.Remove(member);
 
-                    MemberCategory newCategory = GetOrInstantiateAndAddMemberCategory(displayProperties.Category);
+                    MemberCategory newCategory = GetOrInstantiateAndAddMemberCategory(displayProperties.Category, category.Label);
                     member.Category = newCategory;
                     newCategory.Members.Add(member);
                 }
@@ -403,8 +403,7 @@ namespace WpfDataUi
 
             if(desiredCategory == null)
             {
-                desiredCategory = new MemberCategory(categoryName);
-                desiredCategory.Name = categoryId;
+                desiredCategory = new MemberCategory(categoryId, categoryName);
                 Categories.Add(desiredCategory);
             }
 
@@ -419,10 +418,9 @@ namespace WpfDataUi
         {
             if (ShouldCreateUiFor(memberInfo.GetMemberType(), memberInfo.Name))
             {
-
                 string categoryName = GetCategoryAttributeFor(memberInfo);
 
-                MemberCategory memberCategory = GetOrInstantiateAndAddMemberCategory(categoryName);
+                MemberCategory memberCategory = GetOrInstantiateAndAddMemberCategory(categoryName,Localization.Texts.ResourceManager.GetString(categoryName, Localization.Texts.Culture));
 
                 InstanceMember newMember = new InstanceMember(memberInfo.Name, Instance);
                 AssignInstanceMemberEvents(newMember);
@@ -482,12 +480,12 @@ namespace WpfDataUi
             RefreshDelegateBasedElementVisibility();
         }
 
-        private MemberCategory GetOrInstantiateAndAddMemberCategory(string categoryName)
+        private MemberCategory GetOrInstantiateAndAddMemberCategory(string categoryName, string categoryLabel)
         {
             MemberCategory memberCategory = Categories.FirstOrDefault(item => item.Name == categoryName);
             if (memberCategory == null)
             {
-                memberCategory = new MemberCategory(categoryName);
+                memberCategory = new MemberCategory(categoryName, categoryLabel);
                 Categories.Add(memberCategory);
             }
             return memberCategory;

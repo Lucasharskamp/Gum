@@ -118,5 +118,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
+  
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\FlatRedBall\FRBDK\Localization\Localization.csproj" />
+  </ItemGroup>
 
 </Project>

@@ -15,6 +15,8 @@ namespace WpfDataUi.DataTypes
 
         public string Name { get; set; }
 
+        public string Label { get; set; }
+
         public Visibility Visibility
         {
             get
@@ -95,10 +97,11 @@ namespace WpfDataUi.DataTypes
             InstantiateAll();
         }
 
-        public MemberCategory(string name) 
+        public MemberCategory(string name, string label) 
         {
             InstantiateAll();
             Name = name; 
+            Label = label;
         }
 
         void InstantiateAll()
